@@ -1,4 +1,5 @@
 import os.path
+import os
 from setuptools import setup, Extension
 
 filename = os.path.join(os.path.dirname(__file__), 'description.rst')
@@ -7,7 +8,7 @@ with open(filename) as f:
 
 rsamodule = Extension('ucam_webauth.rsa',
                       sources=['ucam_webauth/rsa.c'],
-                      libraries=["ssl", "crypto"])
+                      libraries=["ssl", "crypto"] if os.name != 'nt' else ["libeay32"])
 
 setup(
     name = "python-raven",
